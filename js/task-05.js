@@ -6,4 +6,7 @@ inputValue.addEventListener('input',onInputValuePrint)
 
 function onInputValuePrint() {
     spanValue.textContent = inputValue.value;
+    if (!inputValue.value) {
+        spanValue.textContent = "Anonymous";
+    }
 }

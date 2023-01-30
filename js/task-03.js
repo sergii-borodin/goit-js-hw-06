@@ -15,25 +15,12 @@ const images = [
 
 const listEl = document.querySelector('.gallery');
 
-const makeImg = ({url, alt}) => {
-  const itemEl = document.createElement('li');
-  itemEl.classList.add('gallery__item')
-
-  const imgEl = document.createElement('img');
-  imgEl.classList.add('gallery__img');
-  imgEl.src = url;
-  imgEl.alt = alt;
-
-  itemEl.append(imgEl);
-
-  return itemEl;
-
-}
 
 
-console.log(makeImg(images[1]))
+const makeImg = images.map(({ url, alt }) => {
+  return `<li class="gallery__item">
+  <img class="gallery__img" src="${url}" alt="${alt}" />
+</li>`
+}).join('')
 
-const imgSet = images.map(makeImg);
-console.dir(imgSet)
-
-listEl.append(...imgSet);
+listEl.insertAdjacentHTML('beforeend', makeImg)

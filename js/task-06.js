@@ -1,18 +1,24 @@
 const inputValue = document.querySelector('#validation-input');
 console.dir(inputValue)
-const inputValidationLength = inputValue.dataset.length;
+const inputValidationLength = Number(inputValue.dataset.length);
+console.log(typeof inputValidationLength);
 
 inputValue.addEventListener('blur', oninputValueBlur)
 
-function oninputValueBlur() {
+function oninputValueBlur(e) {
     console.log(typeof inputValue.value.length)
-    if (inputValue.value.length !== inputValidationLength) {
-        inputValue.classList.add('invalid');
-    } else if (inputValue.value.length === inputValidationLength && inputValue.classList('invalid')) {
+    if (e.target.value.length === inputValidationLength && inputValue.classList.contains('invalid')) {
         inputValue.classList.remove('invalid');
         inputValue.classList.add('valid');
-    } else if (inputValue.value.length !== inputValidationLength && inputValue.classList('valid')) {
+    }
+    if (e.target.value.length !== inputValidationLength && inputValue.classList.contains('valid')){
         inputValue.classList.remove('valid');
         inputValue.classList.add('invalid');
+    }
+    if (e.target.value.length !== inputValidationLength) {  
+        inputValue.classList.add('invalid');
+    }
+    if (e.target.value.length === inputValidationLength) {  
+        inputValue.classList.add('valid');
     }
 }
